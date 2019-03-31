@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1554004691165.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1813594055",
+    "id" : "48079436",
+    "lastKnownWriteTime" : 1554010517,
+    "last_content_update" : 1554010517071,
+    "path" : "~/GitHub/PhillyAI_Hackathon_SingleSyllable/R/scripts/rf_model.R",
+    "project_path" : "scripts/rf_model.R",
+    "properties" : {
+        "cursorPosition" : "40,0",
+        "scrollLine" : "23",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
