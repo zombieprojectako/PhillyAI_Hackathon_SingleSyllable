@@ -15,6 +15,9 @@ inTrain <- sample(1:nrow(data), nrow(data) * 0.85) # select 85% of the items
 train <- data[inTrain, ]
 test <- data[-inTrain, ]
 rm(data, inTrain)
+
+
+
 cols <- c('user_id', 'acne', 'backache',
           'bloating', 'cramp', 'diarrhea', 
           'dizzy', 'headache', 'mood', 'nausea', 
