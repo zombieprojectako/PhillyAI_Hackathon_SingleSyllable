@@ -5,15 +5,15 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "2145020344",
+    "hash" : "1102539662",
     "id" : "2696C0FC",
-    "lastKnownWriteTime" : 1554017537,
-    "last_content_update" : 1554017537833,
+    "lastKnownWriteTime" : 1554026366,
+    "last_content_update" : 1554026366934,
     "path" : "~/GitHub/PhillyAI_Hackathon_SingleSyllable/README.md",
     "project_path" : null,
     "properties" : {
-        "cursorPosition" : "35,0",
-        "scrollLine" : "18"
+        "cursorPosition" : "38,6",
+        "scrollLine" : "21"
     },
     "relative_order" : 2,
     "source_on_save" : false,

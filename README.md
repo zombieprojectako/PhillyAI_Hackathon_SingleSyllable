@@ -31,8 +31,12 @@ George Zipperlen, IT Consultant
 
 William Ulrich, Senior Data Scientist, NFI Inc. 
 
-## Installations & Reproduction Detailed Instructions
+## Reproducable Study 
 
+A copy of the reproducable study is located at: 
+
+PhillyAI_Hackathon_SingleSyllable/R/html/RF_Analysis.html
+      
 
 
 
