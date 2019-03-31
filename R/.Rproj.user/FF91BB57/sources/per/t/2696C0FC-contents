@@ -24,8 +24,11 @@ Infertility is a trying issue for many families accross America.  Infertility tr
 ## Our Team Members
 
 Patrick T. Cronin, Senior Manager, Accenture LLP 
-Bradley Bergling, Consulting Analyst, Accenture LLP 
+
+Bradley Bergling, Consulting Analyst, Accenture LLP
+
 George Zipperlen, IT Consultant
+
 William Ulrich, Senior Data Scientist, NFI Inc. 
 
 ## Installations & Reproduction Detailed Instructions
