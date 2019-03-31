@@ -1,12 +1,13 @@
 # Libraries 
 library(readr)
 library(gbm)
+library(Metrics)
 
 # Script to predict end dates 
 set.seed(1234)
 
 data <- read_csv("~/GitHub/PhillyAI_Hackathon_SingleSyllable/data_out/model_sample_02.csv")
-#data$user_id <- as.factor(data$user_id)
+data$user_id <- as.factor(data$user_id)
 # Naive model 
 ave_cycle = mean(data$TARGET_act_cycle)
 
@@ -23,12 +24,12 @@ cols <- c('user_id', 'acne', 'backache',
           'bloating', 'cramp', 'diarrhea', 
           'dizzy', 'headache', 'mood', 'nausea', 
           'sore', 'est_cycle', 'est_period', 'act_period')
-rf <- randomForest(train$TARGET_act_cycle ~ ., data=train[,cols], ntree=500)
+rf <- train(train$TARGET_act_cycle ~ ., data=train[,cols], ntree=200)
 predicted <- predict(rf, test[,cols])
 
 # actual results 
 results <- as.data.frame(cbind(test$TARGET_act_cycle, predicted))
-results$err = abs(results$V1-results$predicted)
+results$err = mse(results$V1-results$predicted)
 print(mean(results$err))
 
 # Naive Results 
