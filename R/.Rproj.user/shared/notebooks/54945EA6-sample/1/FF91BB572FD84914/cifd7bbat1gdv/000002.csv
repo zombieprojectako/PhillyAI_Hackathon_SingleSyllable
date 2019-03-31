@@ -1,0 +1,23 @@
+"0","data <- read_csv(""~/GitHub/PhillyAI_Hackathon_SingleSyllable/data_out/model_sample_02.csv"")"
+"2","Parsed with column specification:
+cols(
+  user_id = col_double(),
+  cycle_start_date = col_date(format = """"),
+  acne = col_double(),
+  backache = col_double(),
+  bloating = col_double(),
+  cramp = col_double(),
+  diarrhea = col_double(),
+  dizzy = col_double(),
+  headache = col_double(),
+  mood = col_double(),
+  nausea = col_double(),
+  sore = col_double(),
+  key = col_double(),
+  est_cycle = col_double(),
+  TARGET_act_cycle = col_double(),
+  est_period = col_double(),
+  act_period = col_double(),
+  prior_period_end_date = col_date(format = """")
+)
+"

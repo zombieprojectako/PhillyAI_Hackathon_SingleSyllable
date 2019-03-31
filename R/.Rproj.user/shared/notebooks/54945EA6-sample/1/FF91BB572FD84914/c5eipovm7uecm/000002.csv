@@ -1,0 +1,6 @@
+"0","cols <- c('user_id', 'acne', 'backache',"
+"0","          'bloating', 'cramp', 'diarrhea', "
+"0","          'dizzy', 'headache', 'mood', 'nausea', "
+"0","          'sore', 'est_cycle', 'est_period', 'act_period')"
+"0","rf <- randomForest(train$TARGET_act_cycle ~ ., data=train[,cols], ntree=200)"
+"0","predicted <- predict(rf, test[,cols])"

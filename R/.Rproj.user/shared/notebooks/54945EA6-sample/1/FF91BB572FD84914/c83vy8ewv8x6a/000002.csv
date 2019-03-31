@@ -1,0 +1,5 @@
+"0","# create test and training sets "
+"0","inTrain <- sample(1:nrow(data), nrow(data) * 0.85) # select 85% of the items "
+"0","train <- data[inTrain, ]"
+"0","test <- data[-inTrain, ]"
+"0","rm(data, inTrain)"

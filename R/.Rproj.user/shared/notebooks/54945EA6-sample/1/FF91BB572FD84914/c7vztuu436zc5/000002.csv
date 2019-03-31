@@ -1,0 +1,7 @@
+"0","# Naive model "
+"0","ave_cycle = mean(data$TARGET_act_cycle)"
+"0","print(ave_cycle)"
+"1","[1]"
+"1"," 28.7503"
+"1","
+"
