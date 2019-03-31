@@ -1,0 +1,8 @@
+Note to Model Sample 03
+
+- Minor changes from sample 2 to sample 3,
+	1) deleted datetime objects, just needed numericals. 
+	2) rearranged the columns, moving expected and actual cycle and period cols forward. 
+	3) deleted the index.   
+	
+	
