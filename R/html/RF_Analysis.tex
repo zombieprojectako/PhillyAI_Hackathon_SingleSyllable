@@ -1,0 +1,294 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Random Forest, Cycle Prediction},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{Random Forest, Cycle Prediction}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{}
+    \preauthor{}\postauthor{}
+    \date{}
+    \predate{}\postdate{}
+  
+
+\begin{document}
+\maketitle
+
+The goal of this project is to be able to predict the onset of a
+ovulation cycle, given the termination point (date) of the prior
+ovulation cycle, i.e.~the actual length of a cycle, given the past
+history of he patient. The valuation of this process is measure by how
+much been a prediction could be over a naive estimate. The naive
+estimate, ignore all other attributes is based upon the mean cycle
+length, which based on the current data set is 28.75 days.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Libraries }
+\KeywordTok{library}\NormalTok{(readr)}
+\KeywordTok{library}\NormalTok{(randomForest)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'randomForest' was built under R version 3.5.3
+\end{verbatim}
+
+\begin{verbatim}
+## randomForest 4.6-14
+\end{verbatim}
+
+\begin{verbatim}
+## Type rfNews() to see new features/changes/bug fixes.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Script to predict end dates }
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{1234}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Step 1, Load the Data Set}\label{step-1-load-the-data-set}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"~/GitHub/PhillyAI_Hackathon_SingleSyllable/data_out/model_sample_02.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Parsed with column specification:
+## cols(
+##   user_id = col_double(),
+##   cycle_start_date = col_date(format = ""),
+##   acne = col_double(),
+##   backache = col_double(),
+##   bloating = col_double(),
+##   cramp = col_double(),
+##   diarrhea = col_double(),
+##   dizzy = col_double(),
+##   headache = col_double(),
+##   mood = col_double(),
+##   nausea = col_double(),
+##   sore = col_double(),
+##   key = col_double(),
+##   est_cycle = col_double(),
+##   TARGET_act_cycle = col_double(),
+##   est_period = col_double(),
+##   act_period = col_double(),
+##   prior_period_end_date = col_date(format = "")
+## )
+\end{verbatim}
+
+\subsection{Step 2, Calculate the naive
+Estimate}\label{step-2-calculate-the-naive-estimate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Naive model }
+\NormalTok{ave_cycle =}\StringTok{ }\KeywordTok{mean}\NormalTok{(data}\OperatorTok{$}\NormalTok{TARGET_act_cycle)}
+\KeywordTok{print}\NormalTok{(ave_cycle)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 28.7503
+\end{verbatim}
+
+\subsection{Step 3, Created the train/test data sets
+(Partition)}\label{step-3-created-the-traintest-data-sets-partition}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# create test and training sets }
+\NormalTok{inTrain <-}\StringTok{ }\KeywordTok{sample}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(data), }\KeywordTok{nrow}\NormalTok{(data) }\OperatorTok{*}\StringTok{ }\FloatTok{0.85}\NormalTok{) }\CommentTok{# select 85% of the items }
+\NormalTok{train <-}\StringTok{ }\NormalTok{data[inTrain, ]}
+\NormalTok{test <-}\StringTok{ }\NormalTok{data[}\OperatorTok{-}\NormalTok{inTrain, ]}
+\KeywordTok{rm}\NormalTok{(data, inTrain)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Step 4, Build Model and Make
+Predicitions}\label{step-4-build-model-and-make-predicitions}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cols <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{'user_id'}\NormalTok{, }\StringTok{'acne'}\NormalTok{, }\StringTok{'backache'}\NormalTok{,}
+          \StringTok{'bloating'}\NormalTok{, }\StringTok{'cramp'}\NormalTok{, }\StringTok{'diarrhea'}\NormalTok{, }
+          \StringTok{'dizzy'}\NormalTok{, }\StringTok{'headache'}\NormalTok{, }\StringTok{'mood'}\NormalTok{, }\StringTok{'nausea'}\NormalTok{, }
+          \StringTok{'sore'}\NormalTok{, }\StringTok{'est_cycle'}\NormalTok{, }\StringTok{'est_period'}\NormalTok{, }\StringTok{'act_period'}\NormalTok{)}
+\NormalTok{rf <-}\StringTok{ }\KeywordTok{randomForest}\NormalTok{(train}\OperatorTok{$}\NormalTok{TARGET_act_cycle }\OperatorTok{~}\StringTok{ }\NormalTok{., }\DataTypeTok{data=}\NormalTok{train[,cols], }\DataTypeTok{ntree=}\DecValTok{200}\NormalTok{)}
+\NormalTok{predicted <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(rf, test[,cols])}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Step 5, Determine Accuracy of RF model using
+Root-Mean-Square-Error
+(RMSE)}\label{step-5-determine-accuracy-of-rf-model-using-root-mean-square-error-rmse}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# actual results }
+\NormalTok{results <-}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(}\KeywordTok{cbind}\NormalTok{(test}\OperatorTok{$}\NormalTok{TARGET_act_cycle, predicted))}
+\NormalTok{results}\OperatorTok{$}\NormalTok{err =}\StringTok{ }\NormalTok{(results}\OperatorTok{$}\NormalTok{V1}\OperatorTok{-}\NormalTok{results}\OperatorTok{$}\NormalTok{predicted)}\OperatorTok{^}\DecValTok{2}
+\NormalTok{mse_rf =}\StringTok{ }\KeywordTok{mean}\NormalTok{(results}\OperatorTok{$}\NormalTok{err)}
+\KeywordTok{print}\NormalTok{(}\KeywordTok{sqrt}\NormalTok{(mse_rf))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 4.511861
+\end{verbatim}
+
+\subsection{Step 6, Determine Accuracy of naive Model using
+RMSE}\label{step-6-determine-accuracy-of-naive-model-using-rmse}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Naive Results }
+\NormalTok{results2 <-}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(}\KeywordTok{cbind}\NormalTok{(test}\OperatorTok{$}\NormalTok{TARGET_act_cycle))}
+\NormalTok{results2}\OperatorTok{$}\NormalTok{predicted =}\StringTok{ }\NormalTok{ave_cycle}
+\NormalTok{results2}\OperatorTok{$}\NormalTok{err =}\StringTok{ }\NormalTok{(results2}\OperatorTok{$}\NormalTok{V1}\OperatorTok{-}\NormalTok{results2}\OperatorTok{$}\NormalTok{predicted)}\OperatorTok{^}\DecValTok{2}
+\NormalTok{mse_ne =}\StringTok{ }\KeywordTok{mean}\NormalTok{(results2}\OperatorTok{$}\NormalTok{err)}
+\KeywordTok{print}\NormalTok{(}\KeywordTok{sqrt}\NormalTok{(mse_ne))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 5.091454
+\end{verbatim}
+
+\subsection{Step 7, Compare accuracy of RF and Naive
+models}\label{step-7-compare-accuracy-of-rf-and-naive-models}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Improvement }
+\NormalTok{net_improvement =}\StringTok{ }\NormalTok{(mse_ne }\OperatorTok{-}\StringTok{ }\NormalTok{mse_rf)}\OperatorTok{/}\NormalTok{mse_ne}
+\KeywordTok{print}\NormalTok{(net_improvement)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.214714
+\end{verbatim}
+
+\subsection{Conclusion}\label{conclusion}
+
+Based upon the evidence provided, it appears that the RF model improved
+accuracy over a naive model by approximately 21.47\%.
+
+
+\end{document}

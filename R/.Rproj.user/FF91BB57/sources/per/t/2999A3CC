@@ -1,0 +1,24 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1554062523537.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2424286247",
+    "id" : "2999A3CC",
+    "lastKnownWriteTime" : 1554062533,
+    "last_content_update" : 1554062533248,
+    "path" : "~/GitHub/PhillyAI_Hackathon_SingleSyllable/R/html/RF_Analysis.Rmd",
+    "project_path" : "html/RF_Analysis.Rmd",
+    "properties" : {
+        "chunk_output_type" : "inline",
+        "cursorPosition" : "88,0",
+        "scrollLine" : "67",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
